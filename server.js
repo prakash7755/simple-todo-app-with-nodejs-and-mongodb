@@ -2,22 +2,16 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose')
 const app = express();
+const models = require('./models/')
 const port = 3000;
 
+app.use(bodyParser.urlencoder({extended: true}));
+app.use(bodyParser.json());
+
+
+require('./routes')(app);
 
 
 
-
-
-
-
-app.listen(port, (err)=> {
-	if (err) {
-		console.log('Port Not connect ' + port);
-	}
-	else {
-	     console.log('Port Will Be connect at ' + port);
-	}
-})
+app.listen(port, () => console.log('TODO Operation Listen on Port No ' + port))

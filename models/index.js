@@ -1,8 +1,8 @@
 'use strict';
 
 const db = require('./db');
-const Todo = require('./todo-resource');
-const User = require('./user';)
+const Todo = require('./todo');
+const User = require('./user');
 
 
 module.exports = { 
