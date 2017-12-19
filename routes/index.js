@@ -1,12 +1,12 @@
 'use strict';
-const Todo = require('./models/index.js');
+const { Todo } = require('../models/');
 
 module.exports = app => {
 	/*
 	 * All Todo Task Get
 	 */
-	 app.get('/api/todo_list', (req, res) => {
-	 	Todo.find({})
+	 app.get('/api/todo_list', (req, res, next) => {
+	 	Todo.find()
 	 	.then(todo => res.json(todo))
 	 	.catch(next)
 	 });
@@ -16,9 +16,10 @@ module.exports = app => {
 	 * Insert New Todo Operation 
 	 */
 
-	 app.post('/api/creat_todo_operation', (req, res) => {
-	 	const { title, status } = req.body || { }
+	 app.post('/api/creat_todo_operation', (req, res, next) => {
 
+	 	const { title, status } = req.body  || {};
+ 
 	 	if (!title || !status) {
 	 		const error = console.error('Bad Requiest')
 	 		return next(error);
@@ -33,22 +34,29 @@ module.exports = app => {
 
 
 	 /*
-	  * Finished Todo Operation Delete
+	  * Completed Todo Operation Delete
 	  */
 
-	  app.dalete('/api/todo_list/:id', (req, res)=> {
+
+	  app.delete('/api/todo_list/:id', (req, res, next) => {
 	  	const id = req.params.id;
-	  	Todo.findByIdAnddelete( id )
-	  	.then(doc => res.json(doc))
-	  	.catch(next)
-	  })
+
+	  	if (!id) {
+	  		const error = new Error('ID should Not Be Empty');
+	  		return next(error);
+	  	}
+
+	  	Todo.findByIdAndRemove(id)
+	  	.then(data => res.json(data))
+	  	.catch(next);
+	  });
 
 
 	  /*
 	   * Any Changes In todo Operation
 	   */
 
-	   app.put('/api/todo_list/:id', (req, res) => {
+	   app.put('/api/todo_list/:id', (req, res,next) => {
 	   	const id = req.params.id;
 	   	if (!id) {
 	   		const error = console.error('Given Todo Operation Not Be Empty');
@@ -63,6 +71,7 @@ module.exports = app => {
 	   	.then(doc => res.json(doc))
 	   	.catch(next)
 
+	   })
 
 	   	/*
          * Handle Errors
@@ -70,9 +79,8 @@ module.exports = app => {
 
          app.use((error, req, res, next) => {
          	const { message } = error || {};
-         	const isSuccess = false
-         	;	res.json({message, isSuccess})
+         	const isSuccess = false;
+      	res.json({message, isSuccess})
          })
 
-     })
-	};
+     };
