@@ -12,33 +12,32 @@ var jwt = require('jsonwebtoken');
  *  User Register
  */
 
-router.route('/register')
-    .post((req, res, next) => {
+ router.route('/register')
+ .post((req, res, next) => {
 
 
-        const { email, password } = req.body || {};
+    const { email, password } = req.body || {};
 
-        if (!email || !password) {
-            const error = console.error('Bad Requiest');
-            return next(error)
-        }
-
-        /*
-         * Password Bcrypet
-         */
-        bcrypt.hash(password, 10)
-            .then((password) => {
-                const user = new User({
-                    email,
-                    password
-                })
-                return user.save()
-            }, console.error('bad Requiest'))
-
-            .then(data => res.json(data))
-            .catch(next)
-
+    if (!email || !password) {
+        return res.send('Bad Requiest')
+    }
+    
+    /*
+     * Password Bcrypet
+     */
+     bcrypt.hash( password, 10)
+     .then((password) => {
+        const user = new User({
+            email,
+            password 
+        })
+        return user.save()
     })
+
+     .then(data => res.json(data))
+     .catch(next)
+
+ })
 
 
 
@@ -47,7 +46,7 @@ router.route('/register')
  */
 
 
-router.post('/login', (req, res, next) => {
+ router.post('/login', (req, res, next) => {
 
     const { email, password } = req.body || {};
 
@@ -57,29 +56,26 @@ router.post('/login', (req, res, next) => {
     }
 
     User.findOne({ email })
-        .then(data => {
+    .then(data => {
 
-            /*
-             * Bcrypt Password Verification
-             */
+       /*
+        * Bcrypt Password Verification
+        */
 
-            console.log(password)
-            console.log(data.password)
-            bcrypt.compare(password, data.password)
-                .then(isCorrect => {
-                    if (!isCorrect) {
-                        return res.status(401).json({
-                            isSuccess: false,
-                            message: 'Incorrect Password'
-                        });
-                    }
-
-                    var token = jwt.sign({ password }, 'mySecret');
-                    return res.json({token})
-                })
-
-        })
-        .catch(next)
+         console.log(password)
+         console.log(data.password)
+        bcrypt.compare(password, data.password)
+        .then((isSuccess) => {
+            if (isSuccess) {
+                var token = jwt.sign({ password }, 'token');
+             return res.json({token})
+            }
+             
+             return res.send('Worn password')
+     })
+       
+    })
+    .catch(next)
 })
 
 
@@ -87,11 +83,11 @@ router.post('/login', (req, res, next) => {
  * Error Handling
  */
 
-router.use((error, req, res, next) => {
+ router.use((error, req, res, next) => {
     const { message } = error || {};
     const isSuccess = false;
     res.json({ message, isSuccess })
 })
 
 
-module.exports = router
+ module.exports = router
