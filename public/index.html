@@ -1,26 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html >
 <head>
 	<meta charset="utf-8">
-	<title>Login Page</title>
-	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<title>Todo Operation</title>
+	<link rel="stylesheet" href="./lab/boostrap.min.css">
+	<link rel="stylesheet" href="./lab/awesomplete.css">
+    <script src="./lab/angular.min.js"></script>
+    <script src="./controller/controller.js"></script>
+    <script src="./services/userAuth.js"></script>
+    <script src="./routes/index.js"></script>
 </head>
-<body>
+<body ng-app="todoApp" ng-controller="TodoCtrl as todoCtrl">
 	<div class="container">
-		<div class="col col-md-4 col-md-offset-4">
-			<h2>Login Page</h2>
-			<form class="form-group" method="post" action="/api/auth/login">
-		    <label>Enter Email</label>
-		    <input type="email" name="mail" class="form-control" placeholder="Enter Email" required=""><br>
-		    <label>Enter Password</label>
-		    <input type="password" name="password" class="form-control" placeholder="Enter Password" required=""><br>
-		    <button class="btn btn-success" type="submit">Submit</button>
-	        </form><br>
-	        <!-- <a href="/">Goto Login Page</a> -->
-	        <a href="/auth/google" class="goole-btn pull-right">Google+</a>
-	        <a href="/auth/fb">Facebook</a>
-
+		<div class="row">
+			<div class="col col-md-4">
+				<h2>Login Page</h2>
+				<form name="userLoginForm" class="form-group" ng-submit="todoCtrl.userVerification(user)">
+					<div>
+					<label for="email">Enter Email</label>
+					<input type="email" name="email" class="form-control" ng-model='todoCtrl.user.email' placeholder="Enter Email..." required="">
+					</div>
+					<div style="margin-top: 20px">
+						<label for="password">Enter Password</label>
+						<input type="password" name="password" class="form-control" ng-model="todoCtrl.user.password" placeholder="Enter Password..." required="">
+					</div>
+					<div style="margin-top: 20px">
+						<button class="btn btn-primary" ng-disabled="userLoginForm.$invalid">Submit</button>
+					</div>
+				</form>
+			</div>
 		</div>
-	</div>
+</div>
 </body>
 </html>

@@ -2,17 +2,32 @@
 
 const router = require('express').Router();
 const passport = require('passport');
+const TokenServ = require('../service/token');
+
 
    /*
     * Google Login User Verification
     */
 
-router.get('/google',  passport.authenticate('google', { scope : ['profile']}));
+router.get('/google',  passport.authenticate('google', { scope : ['email']}));
 
 router.get('/google/login', (req, res, next) => {
-   const google = passport.authenticate('google', { scope: 'email' }, (err, user) => {
+   const google = passport.authenticate('google', { scope: ['email'] }, (err, user) => {
         if (user) {
-            res.send(user.email)
+          const {emails} = user;
+              const email = emails[0].value;
+              const token = TokenServ.generateToken({ email });
+              const htmlStr = `
+              <b>Loading... Just a second</b>
+              <script>
+              var token = '${token}';
+              localStorage.token = token;
+              location.href = '/todos'
+              </script>
+              `;
+                return res.send(htmlStr);
+
+           
         }
         if (err) {
             res.send(err)
@@ -34,13 +49,12 @@ router.get('/fb',
 router.get('/fb/callback', (req, res, next) => {
     const fb = passport.authenticate('facebook', { scope: 'email' }, (err, user) => {
         if (user) {
-            var token = jwt.sign({ password }, 'token');
-             return res.json({token})
-
-            // res.send(user)
+            const email = user._json.email;
+           const token = TokenServ.generateToken({ email });
+                return res.json({ token })
         }
         if (err) {
-            res.send(err)
+           return res.send(err)
         }
     });
 
