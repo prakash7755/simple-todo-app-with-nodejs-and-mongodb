@@ -16,6 +16,10 @@
 			templateUrl: '/partials/register.html',
 			controller: 'RegisterCtrl as registerCtrl'
 		})
+		.when('/todos', {
+			templateUrl: '/partials/todo.html',
+			controller: 'TodoCtrl as todoCtrl'
+		})
 		.otherwise('/login')
 
 	}

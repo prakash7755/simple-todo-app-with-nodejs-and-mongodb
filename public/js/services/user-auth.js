@@ -1,9 +1,11 @@
 'use strict';
 (function() {
     angular.module('myApp')
-        .factory('UserAuth', ['$http', '$window', UserAuth]);
+        .factory('UserAuth', ['$http', '$location', '$window', UserAuth]);
 
-    function UserAuth($http, $window) {
+    function UserAuth($http, $location, $window) {
+
+        const setToken = token => localStorage.token = token;
 
         /*
          * Login Method
@@ -13,7 +15,9 @@
             console.log(data)
             return $http.post('/auth/login', data)
                 .then((res) => {
-                    return res.data
+                    setToken((res.data || {}).token)
+                    $location.url('/todos')
+                    // return res.data
                 })
                 .catch(err => {
                     console.error(err);
@@ -27,7 +31,8 @@
         function register(data) {
            return $http.post('/auth/register', data)
                 .then((res) => {
-                    return res.data
+                    setToken((res.data || {}).token)
+                    $location.url('/todos')
                 })
                 .catch(err => {
                     console.error(err);
