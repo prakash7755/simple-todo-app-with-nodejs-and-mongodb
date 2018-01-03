@@ -20,7 +20,7 @@ router.route('/register')
         const { email, password } = req.body || {};
 
         if (!email || !password) {
-            return res.send('Bad Requiest')
+            return res.status(401).json({message: 'Bad Requiest'});
         }
 
         /*
@@ -79,7 +79,7 @@ router.post('/login', (req, res, next) => {
                 return res.json({ token })
             }
 
-            return res.send('Worn password')
+            return res.status(401).json({message: 'Worn password'})
         })
         .catch(next)
 })

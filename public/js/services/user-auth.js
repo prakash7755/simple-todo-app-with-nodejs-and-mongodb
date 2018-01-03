@@ -1,31 +1,37 @@
 'use strict';
 (function() {
-    angular.module('todoApp')
-        .factory('UserAuth', ['$http', UserAuth]);
+    angular.module('myApp')
+        .factory('UserAuth', ['$http', '$window', UserAuth]);
 
-    function UserAuth($http) {
+    function UserAuth($http, $window) {
 
         /*
          * Login Method
          */
 
         function login(data) {
+            console.log(data)
             return $http.post('/auth/login', data)
                 .then((res) => {
                     return res.data
                 })
                 .catch(err => {
-                    console.error(err)
+                    console.error(err);
+                    throw error 
                 });
         }
-
+        
+        /*
+         * Register User Method
+         */
         function register(data) {
            return $http.post('/auth/register', data)
                 .then((res) => {
                     return res.data
                 })
                 .catch(err => {
-                    console.error(err)
+                    console.error(err);
+                    throw error;
                 });
         }
 
