@@ -13,7 +13,14 @@
          * Add todo List 
          */
         function addTodoList(data) {
-            return $http.post('/api/todo', data)
+            const token = localStorage.token;
+            console.log(token)
+            const headers = {};
+            if (token) {
+                headers.Authorization = token
+
+            }
+            return $http.post('/api/todo', data, {headers})
                 .then(res => {
                     return res.data
                 })
@@ -56,8 +63,14 @@
 
 
         function DeleteTodoList(id) {
+            const token = localStorage.token;
+            const headers = {};
+            if (token) {
+                headers.Authorization = token
 
-            return $http.delete('/api/todo/' + id)
+            }
+
+            return $http.delete('/api/todo/' + id, { headers })
                 .then(res => {
                     return res.data
                 })

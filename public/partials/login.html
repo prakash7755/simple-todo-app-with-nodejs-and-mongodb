@@ -1,6 +1,6 @@
 
 <div class="row justify-content-center align-self-center">
-	<div class="col col-sm-6 col-md-2">
+	<div class="col col-sm-6 col-md-4">
 		<h2>Login Page</h2>
 		<form name="loginForm" class="form-group" ng-submit="loginCtrl.userLogin()">
 			<div class="margin-bottom">
@@ -12,12 +12,12 @@
 				<input type="password" name="password" class="form-control" ng-model="loginCtrl.user.password" placeholder="Enter Password" required>
 			</div>
 			<div class="margin-bottom" >
-				<button class="btn btn-success"  ng-disabled="loginForm.$invalid">Submit</button>
+				<button class="btn btn-success" style="margin-left: 170px; ng-disabled="loginForm.$invalid">Submit</button>
 			</div>
 		</form>
 		<div>
 		<a class="btn btn-primary" href="/auth/fb">Facebook</a>
-		<a class="btn btn-success" href="/auth/google">Google</a>
+		<a class="btn btn-success" style="margin-left: 220px;" href="/auth/google">Google</a>
 		</div>
 	</div>
 </div>
