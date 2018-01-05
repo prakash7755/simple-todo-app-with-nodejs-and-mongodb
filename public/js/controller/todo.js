@@ -20,7 +20,7 @@
          	console.log(vm.todo)
          	TodoServ.addTodoList(vm.todo)
                  .then( data => {
-                 	// vm.todos = data;
+                 
                  })
          }
 
@@ -30,7 +30,6 @@
          	console.log(id)
          	TodoServ.DeleteTodoList(id)
          	.then( data => {
-                 	// vm.todos = data;
          	})
 
          }
