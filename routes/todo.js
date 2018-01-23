@@ -15,7 +15,6 @@ const router = express.Router();
 router.route('/')
 
     .get((req, res, next) => {
-
         Todo.find()
             .then(todo => res.json(todo))
             .catch(next)
@@ -28,7 +27,7 @@ router.route('/')
      */
 
     .post((req, res, next) => {
-        console.log(req.body.title);
+
         const { title, work } = req.body || {};
         if (!title || !work) {
             const error = console.error('Bad Requiest')

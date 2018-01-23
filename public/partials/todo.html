@@ -1,24 +1,28 @@
 <div class="row justify-content-center align-self-center">
-        <div class="col col-md-4">
-        	<h2>Enter Product</h2>
-            <form class="form-group" ng-submit="todoCtrl.addTodoLists()">
-                <div class="margin-bottom">
-                    <label>Enter Product</label>
-                    <input type="text" name="product" ng-model="todoCtrl.todo.title" class="form-control" placeholder="Enter Product" required>
-                </div>
-                <div class="margin-bottom">
-                    <label>Enter Weight</label>
-                    <input type="number" name="weight" ng-model="todoCtrl.todo.work" class="form-control" placeholder="Enter Product" required>
-                </div>
-                <div class="margin-bottom">
-                	<button class="btn btn-success">Submit</button>
-                </div>
-            </form>
+    <div class="col col-md-3">
+       <h2>Enter Product</h2>
+       <form ng-submit="todoCtrl.addTodoLists()">
+        <div>
+            <md-input-container>
+                <label>Enter Product</label>
+                <input ng-model="todoCtrl.todo.title" type="text" required>
+            </md-input-container>
         </div>
-        <div class="col col-md-4">
-        	<h2>Product List</h2>
-        	 <ul class="list-group" class="margin-bottom">
-                <li class="list-group-item" ng-repeat="todo in todoCtrl.todos">{{todo.title}} <b style="margin-left: 100px;">{{todo.work}}</b><h2 class="btn btn-primary pull right" style="margin-left: 100px" ng-click="todoCtrl.deleteProduct($index)">Delete</h2></li>
-            </ul>
+        <div>
+            <md-input-container>
+                <label>Enter Weight</label>
+                <input ng-model="todoCtrl.todo.work" type="number" required>
+            </md-input-container>
         </div>
+        <div >
+                <md-button class="md-raised md-primary" type="submit">Submit</md-button>
+        </div>
+    </form>
+</div>
+<div class="col col-md-4">
+   <h2>Product List</h2>
+   <ul class="list-group" class="margin-bottom">
+    <li class="list-group-item" ng-repeat="todo in todoCtrl.todos">{{todo.title}} <b style="margin-left: 100px;">{{todo.work}}</b><h2 class="btn btn-primary pull right" style="margin-left: 100px" ng-click="todoCtrl.deleteProduct($index)">Delete</h2></li>
+</ul>
+</div>
 </div>

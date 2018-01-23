@@ -1,7 +1,7 @@
 'use strict';
 (function() {
     angular.module('myApp')
-        .controller('LoginCtrl', ['UserAuth', LoginCtrl])
+        .controller('LoginCtrl', ['UserAuth','$window', '$location', LoginCtrl])
 
     function LoginCtrl(UserAuth) {
         const vm = this;
@@ -9,8 +9,11 @@
         vm.userLogin = () => {
             UserAuth.login(vm.user)
                 .then(data => {
-                    if (true) {}
+                    if (data.isSuccess) {}
                     console.log(data)
+                    // const {token} = data ;
+                    // localStorage.token = token;
+                    // $window.location.href='/#!/todos'
                 })
                 .catch(error => {
                     swal(

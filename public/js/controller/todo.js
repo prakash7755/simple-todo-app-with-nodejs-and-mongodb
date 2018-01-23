@@ -19,17 +19,17 @@
          vm.addTodoLists = () => {
          	console.log(vm.todo)
          	TodoServ.addTodoList(vm.todo)
-                 .then( data => {
-                 
+                 .then(data => {
+                    vm.todos.push(data)
                  })
          }
 
 
          vm.deleteProduct = (index) =>{
          var id = vm.todos[index]._id;
-         	console.log(id)
          	TodoServ.DeleteTodoList(id)
          	.then( data => {
+                vm.todos.splice(index, 1)
          	})
 
          }

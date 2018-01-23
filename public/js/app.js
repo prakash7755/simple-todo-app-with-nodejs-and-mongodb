@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-	angular.module('myApp', ['ngRoute'])
+	angular.module('myApp', ['ngRoute','ngMaterial'])
 
 	.config(['$routeProvider', config]);
 

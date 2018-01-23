@@ -10,6 +10,7 @@
         vm.registerForm = () => {
             UserAuth.register(vm.user)
                 .then(data => {
+                    console.log(data)
                     if (!data.isSuccess) {
                         swal(
                             'Oops...',
@@ -18,10 +19,8 @@
                         );
                         return
                     }
-
                     console.log(res.data)
-
-
+                    $window.location.href = '/#!/todos'
                 })
         }
     }

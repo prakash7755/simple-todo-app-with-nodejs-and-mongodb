@@ -1,23 +1,25 @@
-+
+
 <div class="row justify-content-center align-self-center">
-	<div class="col col-sm-6 col-md-4">
+	<div class="col  col-md-3">
 		<h2>Login Page</h2>
-		<form name="loginForm" class="form-group" ng-submit="loginCtrl.userLogin()">
-			<div class="margin-bottom">
-				<label>Enter Email</label>
-				<input type="email" name="email" class="form-control" ng-model="loginCtrl.user.email" placeholder="Enter Email" required>
+		<form ng-submit="loginCtrl.userLogin()">
+			<div >
+				<md-input-container>
+					<label>Email</label>
+					<input ng-model="loginCtrl.user.email" type="email" required>
+				</md-input-container>
 			</div>
-			<div class="margin-bottom">
-				<label>Enter Password</label>
-				<input type="password" name="password" class="form-control" ng-model="loginCtrl.user.password" placeholder="Enter Password" required>
+			<div>
+				<md-input-container>
+					<label>Password</label>
+					<input ng-model="loginCtrl.user.password" type="password" required>
+				</md-input-container>
 			</div>
-			<div class="margin-bottom" >
-				<button class="btn btn-success" style="margin-left: 170px; ng-disabled="loginForm.$invalid">Submit</button>
-			</div>
+			<md-button type="submit" class="md-raised md-primary" style="margin-left: 80px;" ng-disabled="loginForm.$invalid">Submit</md-button>
 		</form>
 		<div>
-		<a class="btn btn-primary" href="/auth/fb">Facebook</a>
-		<a class="btn btn-info" style="margin-left: 220px;" href="/auth/google">Google</a>
+			<a  href="/auth/fb">Facebook</a>
+			<a  style="margin-left: 130px;" href="/auth/google">Google+</a>
 		</div>
 	</div>
 </div>
