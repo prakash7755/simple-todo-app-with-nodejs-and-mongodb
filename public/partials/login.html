@@ -15,11 +15,13 @@
 					<input ng-model="loginCtrl.user.password" type="password" required>
 				</md-input-container>
 			</div>
+			<div>
 			<md-button type="submit" class="md-raised md-primary" style="margin-left: 80px;" ng-disabled="loginForm.$invalid">Submit</md-button>
+		</div>
 		</form>
 		<div>
-			<a  href="/auth/fb">Facebook</a>
-			<a  style="margin-left: 130px;" href="/auth/google">Google+</a>
+			<md-button class="md-raised md-primary" href="/auth/fb">Facebook</md-button>
+			<md-button class="md-raised md-primary"  style="margin-left: 20px;" href="/auth/google">Google+</md-button>
 		</div>
 	</div>
 </div>

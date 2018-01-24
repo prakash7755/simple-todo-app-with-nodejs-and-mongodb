@@ -37,26 +37,17 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/#!/register">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/#!/login">Signin</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/#!/todos">TodoList</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+   <md-toolbar>
+      <h3>
+        <md-button hide-sm href="/#!/register">Register</md-button>
+        <md-button hide-sm href="/#!/login">Login</md-button>
+        <md-button hide-sm href="/#!/todos">Todo</md-button>
+      </h3>
+    </md-toolbar>
     <section ng-view class="container-fluid"></section>
 </body>
 
 </html>
+
+
+

@@ -21,8 +21,8 @@
 </div>
 <div class="col col-md-4">
    <h2>Product List</h2>
-   <ul class="list-group" class="margin-bottom">
-    <li class="list-group-item" ng-repeat="todo in todoCtrl.todos">{{todo.title}} <b style="margin-left: 100px;">{{todo.work}}</b><h2 class="btn btn-primary pull right" style="margin-left: 100px" ng-click="todoCtrl.deleteProduct($index)">Delete</h2></li>
+   <ul class="list-group" ng-repeat="todo in todoCtrl.todos" class="margin-bottom">
+    <li class="list-group-item" >{{todo.title}} <b style="margin-left: 100px;">{{todo.work}}</b><h2 class="btn btn-primary pull right" style="margin-left: 100px" ng-click="todoCtrl.deleteProduct($index)">Delete</h2></li>
 </ul>
 </div>
 </div>

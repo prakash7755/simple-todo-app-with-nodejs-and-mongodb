@@ -10,7 +10,6 @@ module.exports = app => {
     app.use('/auth', [userRouter, googleUser]);
 
     app.use('/api/', (req, res, next) => {
-        console.log(req.headers)
         const token = (req.headers || {}).authorization;
         if (!token) {
             return res.status(401).json({ message: 'Unautharized Access' })

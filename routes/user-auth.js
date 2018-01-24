@@ -15,8 +15,7 @@ const TokenServ = require('../service/token');
 
 router.route('/register')
     .post((req, res, next) => {
-
-
+    console.log(req.body)
         const { email, password } = req.body || {};
 
         if (!email || !password) {
@@ -35,7 +34,14 @@ router.route('/register')
                 return user.save()
             })
 
-            .then(data => res.json(data))
+             .then(isSuccess => {
+            if (isSuccess) {
+                const token = TokenServ.generateToken({ email });
+                return res.json({ token })
+            }
+
+            return res.status(401).json({message: 'Worn password'})
+        })
             .catch(next)
 
     })
@@ -48,9 +54,7 @@ router.route('/register')
 
 
 router.post('/login', (req, res, next) => {
-    console.log(req.body)
     const { email, password } = req.body;
-    console.log({ email, password })
 
     if (!email || !password) {
         const error = console.error('Bad Requiest');
@@ -68,7 +72,6 @@ router.post('/login', (req, res, next) => {
              * Bcrypt Password Verification
              */
 
-            // console.log(data.password)
             return bcrypt.compare(password, data.password)
 
 

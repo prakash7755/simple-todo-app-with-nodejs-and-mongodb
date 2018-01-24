@@ -10,8 +10,7 @@
         vm.registerForm = () => {
             UserAuth.register(vm.user)
                 .then(data => {
-                    console.log(data)
-                    if (!data.isSuccess) {
+                    if (!data.isSuccess && data.message) {
                         swal(
                             'Oops...',
                             'This Email Already Exist!',
@@ -19,8 +18,7 @@
                         );
                         return
                     }
-                    console.log(res.data)
-                    $window.location.href = '/#!/todos'
+                    
                 })
         }
     }

@@ -12,16 +12,16 @@
          */
 
         function login(data) {
-            console.log(data)
             return $http.post('/auth/login', data)
                 .then((res) => {
                     setToken((res.data || {}).token)
                     $location.url('/todos')
-                    // return res.data
+                    return res.data
                 })
-                .catch(err => {
-                    console.error(err);
+                .catch(error => {
+                    console.log(error)
                     throw error 
+                    return error
                 });
         }
         
@@ -31,12 +31,14 @@
         function register(data) {
            return $http.post('/auth/register', data)
                 .then((res) => {
+                    console.log(res.data)
                     setToken((res.data || {}).token)
                     $location.url('/todos')
+                    return res.data
                 })
-                .catch(err => {
-                    console.error(err);
+                .catch(error => {
                     throw error;
+                    return error
                 });
         }
 
